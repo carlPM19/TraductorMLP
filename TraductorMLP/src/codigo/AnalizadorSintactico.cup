@@ -20,6 +20,7 @@ terminal Comentarios, Linea, Comillas, T_dato, Int, Cadena, Incrementar, Set, Pu
     Op_atribucion, Op_incremento, Op_booleano, Parentesis_a, Parentesis_c,
     Llave_a, Llave_c, Corchete_a, Corchete_c, Main, P_coma, Identificador,
     Numero, Dolar, ERROR;
+
 non terminal INICIO, SENTENCIA, DECLARACION, DECLARACION_FOR, IF, IF_ELSE,
     SWITCH, WHILE, DO_WHILE, FOR, SENTENCIA_BOOLEANA, SENTENCIA_FOR, SENTENCIA_SWITCH, PRINT, EXPRESIONES;
 
@@ -91,10 +92,19 @@ Switch Identificador Llave_a SENTENCIA_SWITCH SENTENCIA_SWITCH SENTENCIA_SWITCH 
 ;
 
 SENTENCIA_SWITCH ::= Comillas Numero Comillas Llave_a SENTENCIA Llave_c |
- Default Llave_a SENTENCIA Llave_c 
+ Comillas Numero Comillas Llave_a Puts Identificador Identificador Identificador Identificador Identificador Identificador Llave_c  |
+ Default Llave_a SENTENCIA Llave_c |
+ Default Llave_a Puts Comillas Identificador Identificador Identificador Identificador Identificador Identificador Comillas Llave_c  
 ;
 
+
+
 PRINT ::= Puts Comillas Identificador Comillas |
-Puts Comillas SENTENCIA Comillas
+Puts Comillas SENTENCIA Comillas |
+Puts Comillas Identificador Identificador Comillas |
+Puts Comillas Identificador Identificador Identificador Comillas |
+Puts Comillas Identificador Identificador Identificador Identificador Comillas |
+Puts Comillas Identificador Identificador Identificador Identificador Identificador Dolar Identificador Comillas
 ;
+
 
