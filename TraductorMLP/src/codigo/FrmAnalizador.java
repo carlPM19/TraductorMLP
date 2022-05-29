@@ -67,6 +67,15 @@ public class FrmAnalizador extends javax.swing.JFrame {
                 case If:
                     resultado += "  <Reservada if>\t" + lexer.lexeme + "\n";
                     break;
+                case Return:
+                    resultado += "  <Reservada Return>\t" + lexer.lexeme + "\n";
+                    break;
+                case Break:
+                    resultado += "  <Reservada Break>\t" + lexer.lexeme + "\n";
+                    break;
+                case Continue:
+                    resultado += "  <Reservada Continue>\t" + lexer.lexeme + "\n";
+                    break;    
                 case Else:
                     resultado += "  <Reservada else>\t" + lexer.lexeme + "\n";
                     break;
@@ -84,6 +93,9 @@ public class FrmAnalizador extends javax.swing.JFrame {
                     break;
                 case Default:
                     resultado += "  <Reservada Default>\t" + lexer.lexeme + "\n";
+                    break;
+                case Proc:
+                    resultado += "  <Reservada Proc>\t" + lexer.lexeme + "\n";
                     break;
                 case Igual:
                     resultado += "  <Operador igual>\t" + lexer.lexeme + "\n";

@@ -15,14 +15,17 @@ parser code
 }
 :};
 
-terminal Comentarios, Linea, Comillas, T_dato, Int, Cadena, Incrementar, Set, Puts, Expr, If, Else, Do, While, For, Switch,
-    Default, Igual, Op_aritmetico, Op_logico, Op_relacional,
+terminal Comentarios, Linea, Comillas, T_dato, Int, Cadena, Incrementar, Set, Puts, Expr, If, 
+    Return, Break, Continue, Else, Do, While, For, Switch,
+    Default, Proc, Igual, Op_aritmetico, Op_logico, Op_relacional,
     Op_atribucion, Op_incremento, Op_booleano, Parentesis_a, Parentesis_c,
     Llave_a, Llave_c, Corchete_a, Corchete_c, Main, P_coma, Identificador,
     Numero, Dolar, ERROR;
 
 non terminal INICIO, SENTENCIA, DECLARACION, DECLARACION_FOR, IF, IF_ELSE,
-    SWITCH, WHILE, DO_WHILE, FOR, SENTENCIA_BOOLEANA, SENTENCIA_FOR, SENTENCIA_SWITCH, PRINT, EXPRESIONES;
+    SWITCH, WHILE, DO_WHILE, FOR, SENTENCIA_BOOLEANA, SENTENCIA_FOR, 
+    SENTENCIA_SWITCH, PRINT, EXPRESIONES,
+    PROC;
 
 start with INICIO;
 
@@ -45,14 +48,22 @@ SENTENCIA ::=
     SENTENCIA FOR |
     FOR |
     SENTENCIA PRINT |
-    PRINT
+    PRINT |
+    SENTENCIA PROC |
+    PROC
 ;
 DECLARACION ::= 
     Set Identificador Numero |
     Set Identificador Identificador |
-    Set Identificador Corchete_a Expr Dolar Identificador Op_aritmetico Dolar Identificador Corchete_c 
+    Set Identificador Corchete_a Expr Dolar Identificador Op_aritmetico Dolar Identificador Corchete_c |
+    Set Identificador Corchete_a Expr Dolar Identificador Op_aritmetico Numero Corchete_c |
+    Set Identificador Corchete_a Expr Llave_a Dolar Identificador Op_aritmetico Numero Llave_c Corchete_c 
 ;
-IF ::= If Llave_a SENTENCIA_BOOLEANA Llave_c Llave_a SENTENCIA Llave_c 
+IF ::= If Llave_a SENTENCIA_BOOLEANA Llave_c Llave_a SENTENCIA Llave_c |
+If Llave_a SENTENCIA_BOOLEANA Llave_c Llave_a SENTENCIA Break Llave_c |
+If Llave_a SENTENCIA_BOOLEANA Llave_c Llave_a SENTENCIA Continue Llave_c |
+If Llave_a SENTENCIA_BOOLEANA Llave_c Llave_a Continue Llave_c |
+If Llave_a SENTENCIA_BOOLEANA Llave_c Llave_a Break Llave_c 
 ;
 SENTENCIA_BOOLEANA ::=
     Dolar Identificador Op_relacional Numero |
@@ -66,7 +77,8 @@ SENTENCIA_BOOLEANA ::=
 ;
 IF_ELSE ::= If Parentesis_a SENTENCIA_BOOLEANA Parentesis_c Llave_a SENTENCIA Llave_c Else Llave_a SENTENCIA Llave_c
 ;
-WHILE ::= While Parentesis_a SENTENCIA_BOOLEANA Parentesis_c Llave_a SENTENCIA Llave_c
+WHILE ::= While Llave_a SENTENCIA_BOOLEANA Llave_c Llave_a SENTENCIA Llave_c |
+While Comillas SENTENCIA_BOOLEANA Comillas Llave_a SENTENCIA Llave_c 
 ;
 DO_WHILE ::= Do Llave_a SENTENCIA Llave_c While Parentesis_a SENTENCIA_BOOLEANA Parentesis_c P_coma
 ;
@@ -81,6 +93,9 @@ DECLARACION_FOR ::=
     Identificador Op_atribucion Numero |
     Identificador Op_incremento | 
     Op_incremento Identificador
+;
+
+PROC ::= Proc Identificador Llave_a Identificador Identificador Llave_c Llave_a SENTENCIA Return Dolar Identificador Llave_c
 ;
 
 SWITCH ::= Switch Identificador Llave_a SENTENCIA_SWITCH Llave_c |
@@ -101,6 +116,8 @@ SENTENCIA_SWITCH ::= Comillas Numero Comillas Llave_a SENTENCIA Llave_c |
 
 PRINT ::= Puts Comillas Identificador Comillas |
 Puts Comillas SENTENCIA Comillas |
+Puts Comillas Identificador Identificador Dolar Identificador Comillas |
+Puts Comillas Identificador Identificador Identificador Identificador Dolar Identificador Comillas |
 Puts Comillas Identificador Identificador Comillas |
 Puts Comillas Identificador Identificador Identificador Comillas |
 Puts Comillas Identificador Identificador Identificador Identificador Comillas |

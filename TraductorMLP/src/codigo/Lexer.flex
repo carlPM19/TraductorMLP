@@ -41,6 +41,15 @@ espacio=[ ,\t,\r]+
 /* Palabra reservada Expr */
 ( expr ) {lexeme=yytext(); return Expr;}
 
+/* Palabra reservada Return */
+( return ) {lexeme=yytext(); return Return;}
+
+/* Palabra reservada Break */
+( break ) {lexeme=yytext(); return Break;}
+
+/* Palabra reservada Continue */
+( continue ) {lexeme=yytext(); return Continue;}
+
 /* Palabra reservada If */
 ( if ) {lexeme=yytext(); return If;}
 
@@ -61,6 +70,12 @@ espacio=[ ,\t,\r]+
 
 /* Palabra reservada Default */
 ( default ) {lexeme=yytext(); return Default;}
+
+/* Palabra reservada Default */
+( default ) {lexeme=yytext(); return Default;}
+
+/*Palabra reservada Proc*/
+( proc ) {lexeme=yytext(); return Proc;}
 
 /* Operador Igual */
 ( "=" ) {lexeme=yytext(); return Igual;}

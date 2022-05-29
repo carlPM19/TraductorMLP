@@ -53,6 +53,15 @@ espacio=[ ,\t,\r,\n]+
 /* Palabra reservada If */
 ( if ) {return new Symbol(sym.If, yychar, yyline, yytext());}
 
+/* Palabra reservada Return */
+( return ) {return new Symbol(sym.Return, yychar, yyline, yytext());}
+
+/* Palabra reservada Break */
+( break ) {return new Symbol(sym.Break, yychar, yyline, yytext());}
+
+/* Palabra reservada Continue */
+( continue ) {return new Symbol(sym.Continue, yychar, yyline, yytext());}
+
 /* Palabra reservada Else */
 ( else ) {return new Symbol(sym.Else, yychar, yyline, yytext());}
 
@@ -70,6 +79,9 @@ espacio=[ ,\t,\r,\n]+
 
 /* Palabra reservada Default */
 ( default ) {return new Symbol(sym.Default, yychar, yyline, yytext());}
+
+/* Palabra reservada Proc */
+( proc ) {return new Symbol(sym.Proc, yychar, yyline, yytext());}
 
 /* Operador Igual */
 ( "=" ) {return new Symbol(sym.Igual, yychar, yyline, yytext());}
